@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".HomeActivity">
 
     <EditText
         android:id="@+id/nameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18dp"
         android:hint="Enter your name:"/>
 
-    <Button
-        android:id="@+id/size7"
-        android:onClick="StartMainActivity"
+
+
+    <TextView
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Choose Difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nameEditText"
-        android:text="Easy"/>
+        android:id="@+id/textView2" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/easy"
+            android:text="Easy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/medium"
+            android:text="Medium"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/hard"
+            android:text="Hard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
 
     <Button
-        android:id="@+id/size10"
         android:onClick="StartMainActivity"
-        android:layout_width="wrap_content"
+        android:text="START"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/size7"
-        android:text="Intermediate"/>
+        android:id="@+id/button" />
 
-    <Button
-        android:id="@+id/size20"
-        android:onClick="StartMainActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Difficult"
-        android:layout_below="@id/size10"/>
 
-</RelativeLayout>
+
+
+</LinearLayout>

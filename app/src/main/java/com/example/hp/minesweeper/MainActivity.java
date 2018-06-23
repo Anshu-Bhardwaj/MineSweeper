@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static int[] X= {-1,-1,-1,0,0,1,1,1};
     public static int[] Y ={-1,0,1,-1,1,-1,0,1};
 
-    public static int m=5,n=5,t=((m*n)/10)+1;
+    public static int m,n,t;
 
     public ArrayList<LinearLayout> rows;
 
@@ -43,13 +44,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         Intent  intent=getIntent();
-        String name= intent.getStringExtra("User_Name");
-        TextView textView=findViewById(R.id.nameTextView);
+        String name= intent.getStringExtra("Player_Name");
+        TextView textView=findViewById(R.id.nameTextValue);
         textView.setText(name);
+        int difficulty = intent.getIntExtra("difficulty",HomeActivity.INTERMEDIATE);
+        switch (difficulty){
+            case HomeActivity.EASY:
+                m=7;
+                n=7;
+                t=5;
+                break;
+            case HomeActivity.INTERMEDIATE:
+                m=10;
+                n=10;
+                t=10;
+                break;
+            case HomeActivity.HARD:
+                m=12;
+                n=12;
+                t=15;
+                break;
+        }
 
         rootLayout = findViewById(R.id.rootLayout);
 
         random= new Random();
+
         setupBoard();
 
     }
@@ -162,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     @Override
     public void onClick(View view) {
          MineButton button = (MineButton) view;
@@ -200,8 +219,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onLongClick(View view) {
         MineButton button = (MineButton) view;
-        for (int i = 0; i < m; i++) {
-           for (int j = 0; j < n; j++) {
                 if (!button.IS_FLAG && button.IS_REVEALED==false) {
                          button.setText("F");
                          button.IS_REVEALED=true;
@@ -214,8 +231,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     button.IS_FLAG=false;
                     count--;
                 }
-            }
-        }
         checkWin();
         return true;
     }
