@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int x = 0;
         while (x < t) {
             int randomInt = random.nextInt(m * n);
-            int i = randomInt / n;
+            int i = randomInt / m;
             int j = randomInt % n;
 
             Log.i("MainActivity","i : "+i+"j : "+j);
