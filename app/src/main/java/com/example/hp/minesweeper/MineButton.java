@@ -12,9 +12,8 @@ public class MineButton extends AppCompatButton {
     int y;
     int VALUE = 0;
 
-    public MineButton(Context context){
+    public MineButton(Context context) {
         super(context);
     }
-
 
 }

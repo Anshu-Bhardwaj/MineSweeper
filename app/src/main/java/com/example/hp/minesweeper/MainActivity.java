@@ -110,14 +110,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        int x=0;
-        while(x<t){
-            int i=random.nextInt(m-1);
-            int j=random.nextInt(n-1);
-            Log.i("MainActivity","i: "+i+"  j: "+j);
-            board[i][j].MINE=-1;
-            countOfNeighbour(i,j);
-            x++;
+     setMines();
+    }
+
+    public void setMines() {
+        int x = 0;
+        while (x < t) {
+            int randomInt = random.nextInt(m * n);
+            int i = randomInt / n;
+            int j = randomInt % n;
+
+            Log.i("MainActivity","i : "+i+"j : "+j);
+            if (board[i][j].MINE != -1) {
+                board[i][j].MINE = -1;
+                countOfNeighbour(i, j);
+                x++;
+
+
+            }
         }
     }
 
@@ -178,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         setupBoard();
+        currentStatus=INCOMPLETE;
         return super.onOptionsItemSelected(item);
     }
 
@@ -185,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
          MineButton button = (MineButton) view;
-
         if (currentStatus != GAME_OVER) {
 
             if (button.MINE == -1) {
@@ -193,12 +203,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     for (int j = 0; j < n; j++) {
                         if (board[i][j].MINE == -1){
                             board[i][j].setText("#");
+
                         }
 
                     }
                 }
 
-                Toast.makeText(this, "GAME OVER", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "YOU LOOSE", Toast.LENGTH_LONG).show();
                 currentStatus = GAME_OVER;
             }
             else if (button.MINE != -1 && button.VALUE != 0 && !button.IS_FLAG ) {
@@ -219,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onLongClick(View view) {
         MineButton button = (MineButton) view;
-                if (!button.IS_FLAG && button.IS_REVEALED==false) {
+                if (!button.IS_FLAG && button.IS_REVEALED==false ) {
                          button.setText("F");
                          button.IS_REVEALED=true;
                          button.IS_FLAG=true;
