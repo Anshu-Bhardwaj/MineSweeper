@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         rootLayout = findViewById(R.id.rootLayout);
-
         random= new Random();
 
         setupBoard();
@@ -196,53 +195,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
          MineButton button = (MineButton) view;
-        if (currentStatus != GAME_OVER) {
+            if (currentStatus != GAME_OVER) {
 
-            if (button.MINE == -1) {
-                for (int i = 0; i < m; i++) {
-                    for (int j = 0; j < n; j++) {
-                        if (board[i][j].MINE == -1){
-                            board[i][j].setText("#");
-
+                if (button.MINE == -1) {
+                    for (int i = 0; i < m; i++) {
+                        for (int j = 0; j < n; j++) {
+                            if (board[i][j].MINE == -1) {
+                                board[i][j].setBackgroundResource(R.drawable.mine);
+                            }
                         }
-
                     }
-                }
 
-                Toast.makeText(this, "YOU LOOSE", Toast.LENGTH_LONG).show();
-                currentStatus = GAME_OVER;
-            }
-            else if (button.MINE != -1 && button.VALUE != 0 && !button.IS_FLAG ) {
+                    Toast.makeText(this, "YOU LOOSE", Toast.LENGTH_LONG).show();
+                    currentStatus = GAME_OVER;
+                } else if (button.MINE != -1 && button.VALUE != 0 && button.IS_FLAG == false) {
                     button.setText(button.VALUE + "");
-                    button.IS_REVEALED=true;
-                checkWin();
-            }
-
-            else if(button.MINE!=-1 && button.VALUE==0 && button.IS_REVEALED==false ){
-                revealNeighbour(button.x,button.y);
-                button.IS_REVEALED=true;
-                checkWin();
+                    button.IS_REVEALED = true;
+                    checkWin();
+                } else if (button.MINE != -1 && button.VALUE == 0 && button.IS_REVEALED == false && button.IS_FLAG == false) {
+                    button.setText("0");
+                    revealNeighbour(button.x, button.y);
+                    button.IS_REVEALED = true;
+                    checkWin();
+                }
             }
         }
 
-    }
 
     @Override
     public boolean onLongClick(View view) {
         MineButton button = (MineButton) view;
-                if (!button.IS_FLAG && button.IS_REVEALED==false ) {
-                         button.setText("F");
-                         button.IS_REVEALED=true;
-                         button.IS_FLAG=true;
-                         count++;
+                if (button.IS_REVEALED==false ) {
+                    button.setBackgroundResource(R.drawable.flag);
+                    button.IS_REVEALED = true;
+                    button.IS_FLAG = true;
+                    count++;
+                    checkWin();
                 }
-                else if(button.IS_FLAG && button.IS_REVEALED==true){
-                    button.setText("");
+                else if(button.IS_FLAG){
+                    button.setBackgroundResource(R.drawable.button_bg);
                     button.IS_REVEALED=false;
                     button.IS_FLAG=false;
                     count--;
                 }
-        checkWin();
+
         return true;
     }
 }

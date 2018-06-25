@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -15,7 +16,6 @@ public class HomeActivity extends AppCompatActivity {
 
     EditText editText;
     RadioGroup radioGroup;
-
 
     public static final int EASY = 0;
     public static final int INTERMEDIATE= 1;
